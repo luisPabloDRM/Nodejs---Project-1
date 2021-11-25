@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Movies = require('../models/Movies');
+const Movie = require('../models/Movies');
 const { DB_URL, CONFIG_DB } = require('../config/db');
 
 const moviesArray = [
@@ -41,23 +41,24 @@ const moviesArray = [
     },
   ];
 
+  const movieDocument = moviesArray.map(movie=> new Movie(movie))
 
 mongoose.connect(DB_URL, CONFIG_DB)
     .then(async () => {
         console.log('Ejecutando seed de Moviess...');
         
-        const allMoviess = await Movies.find();
+        const allMoviess = await Movie.find();
         console.log(allMoviess)
 
         if (allMoviess.length) { 
-            await Movies.collection.drop();
+            await Movie.collection.drop();
             console.log('Colección Moviess eliminada con éxito');
         }
     })
     .catch(error => console.log('Error buscando en la DB', error))
     .then(async () => {
        
-        await Movies.insertMany(moviesArray);
+        await Movie.insertMany(moviesArray);
         console.log('Añadidos nuevos personajes a DB');
     })
     .catch(error => console.log('Error añadiendo peliculas nuevas', error))

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const DB_URL = 'mongodb://localhost:27017/project01';
-const CONFIG_DB = { useNeewUrlParser: true, useUnifiedTopology: true };
+const CONFIG_DB = { useNewUrlParser: true, useUnifiedTopology: true };
 
 const connectToDb = async () => {
     try {
