@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
     return next(error);
   }
 });
-
+// Método post para crear una nueva Película.
 router.post('/create', async (req, res, next) => {
   try {
 
@@ -35,7 +35,24 @@ router.post('/create', async (req, res, next) => {
   }
 });
 
+// Método PUT para  modificar una película.
 
+router.put('/add-movie', async (req, res, next)=>{
+  try{
+    const { movieId} = req.body;
+
+    const updatedMovie = await Movie.findByIdAndUpdate(
+      movieId,
+    
+      { new: true }
+  );
+
+  return res.status(200).json(updatedMovie);
+
+} catch (error) {
+  return next(error);
+}
+});
 
 
 
