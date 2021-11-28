@@ -55,7 +55,22 @@ router.put('/add-movie', async (req, res, next)=>{
 });
 
 
+// DELETE Method
+router.delete('/delete/:id', async (req, res, next) => {
+  try{
+    const{ id } =req.params;
 
+    const deleted = await Movie.findByIdAndDelete(id);
+
+    if(deleted) {
+      return res.status(200).json({message: 'Movie deleted succesfully!', data: deleted });
+    } else {
+      return res.status(404).json(`Can't find movie`);
+    }
+  } catch (error) {
+    return next (error);
+  }
+})
 
 
 // Encontrar pelicula por el ID
