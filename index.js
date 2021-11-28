@@ -1,6 +1,9 @@
 const express = require('express');
+const passport = require('passport'); 
 const indexRouter = require('./routes/index.routes');
 const movieRouter = require('./routes/movie.routes');
+const authRoutes = require ('./routes/auth.routes');
+require('./auth/register.strategy');
 
 
 const { connectToDb } = require('./config/db');
@@ -9,12 +12,15 @@ connectToDb();
 const PORT = 3000;
 const server = express();
 
+server.use(passport.initialize());
+
 server.use(express.json());
 
 server.use(express.urlencoded({extended: false }));
 
 server.use('/', indexRouter);
 server.use('/movie', movieRouter);
+server.use('/auth', authRoutes);
 
 
 server.use((error, req, res, next)=>{

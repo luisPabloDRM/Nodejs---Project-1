@@ -77,6 +77,9 @@ router.get('/:title', async (req, res) => {
   }
 });
 
+
+//filtrar peliculas por genero
+
 router.get('/genre/:genre', async (req, res) => {
   try {
     const {genre} = req.params;
@@ -90,6 +93,8 @@ router.get('/genre/:genre', async (req, res) => {
     return next(error);
   }
 });
+
+//filtrar peliculas por año
 router.get("/search", async (req, res, next) => {
   try {
   
