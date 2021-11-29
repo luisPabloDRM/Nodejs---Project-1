@@ -3,7 +3,7 @@ const Cinema = require("../models/Cinema");
 
 const router = express.Router();
 // GET METHOD 
-router.get("/", async (req, res, next) => {
+router.get("/cinema", async (req, res, next) => {
   try {
     const cinemas = await Cinema.find();
     res.setHeader('node', 'me-mata');

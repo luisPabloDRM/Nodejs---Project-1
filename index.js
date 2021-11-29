@@ -3,6 +3,7 @@ const passport = require('passport');
 const indexRouter = require('./routes/index.routes');
 const movieRouter = require('./routes/movie.routes');
 const authRoutes = require ('./routes/auth.routes');
+const cinemaRoutes = require ('./routes/cinema.routes');
 require('./auth/register.strategy');
 
 
@@ -21,7 +22,7 @@ server.use(express.urlencoded({extended: false }));
 server.use('/', indexRouter);
 server.use('/movie', movieRouter);
 server.use('/auth', authRoutes);
-
+server.use('/cinema', cinemaRoutes);
 
 server.use((error, req, res, next)=>{
 
