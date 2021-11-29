@@ -3,10 +3,10 @@ const Cinema = require("../models/Cinema");
 
 const router = express.Router();
 // GET METHOD 
-router.get("/cinema", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const cinemas = await Cinema.find();
-    res.setHeader('node', 'me-mata');
+    const cinemas = await Cinema.find().populate('movies');
+    //res.setHeader('node', 'me-mata');
     return res.status(200).json(cinemas);
   } catch (error) {
     return next(error);
@@ -20,11 +20,11 @@ router.post('/create', async (req, res, next) => {
     const newCinema = new Cinema({
       name: req.body.name,
       location: req.body.location,
-      movies: req.body.movies,
+      movies: [],
       
     });
 
-    const createdCinema = await newCinema.saveCinema
+    const createdCinema = await newCinema.save();
     console.log('cinema created--->', createdCinema);
 
     return res.status(200).json(createdCinema);

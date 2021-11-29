@@ -13,6 +13,8 @@ router.get("/", async (req, res, next) => {
     return next(error);
   }
 });
+
+
 // Método post para crear una nueva Película.
 router.post('/create', async (req, res, next) => {
   try {
@@ -94,11 +96,9 @@ router.get("/:id", async (req, res, next) => {
 });
 // filtrar por title
 
-router.get('/:title', async (req, res) => {
+router.get('/:title', async (req, res, next) => {
   try {
-    const {
-      title
-    } = req.params;
+    const title = req.params.title;
     const movie = await Movie.find({
       title: title
     });
@@ -113,7 +113,7 @@ router.get('/:title', async (req, res) => {
 
 //filtrar peliculas por genero
 
-router.get('/genre/:genre', async (req, res) => {
+router.get('/:genre', async (req, res) => {
   try {
     const {genre} = req.params;
     const movie = await Movie.find({
