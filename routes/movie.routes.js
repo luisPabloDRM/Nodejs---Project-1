@@ -76,25 +76,11 @@ router.delete('/delete/:id', async (req, res, next) => {
 })
 
 
-// Encontrar pelicula por el ID
+/
 
 
 
-router.get("/:id", async (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const movie = await Movie.findById(id);
-
-    if (movie) {
-      return res.status(200).json(movie);
-    } else {
-      return res.status(404).json("No se encuentra la pelicula que buscas");
-    }
-  } catch (error) {
-    return next(error);
-  }
-});
-// filtrar por title
+//filtrar por title
 
 router.get('/:title', async (req, res, next) => {
   try {
@@ -113,7 +99,7 @@ router.get('/:title', async (req, res, next) => {
 
 //filtrar peliculas por genero
 
-router.get('/:genre', async (req, res) => {
+router.get('genre/:genre', async (req, res) => {
   try {
     const {genre} = req.params;
     const movie = await Movie.find({
@@ -128,23 +114,39 @@ router.get('/:genre', async (req, res) => {
 });
 
 //filtrar peliculas por año
-router.get("/search", async (req, res, next) => {
+router.get("search/:year", async (req, res, next) => {
   try {
-  
+
 
     const {year} = req.params;
-    const movies = await Movies.find({
-       year: { $gt: year },
+    const movie = await Movie.find({
+       year: { $gt: year }
      });
-    console.log(movies);
+    console.log(movie);
 
-    return res.status(200).json(movies);
+    return res.status(200).json(movie);
   } catch (error) {
     return next(error);
   }
 });
 
 
+// Encontrar pelicula por el ID
+router.get("/:id", async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const movie = await Movie.findById(id);
+
+    if (movie) {
+      return res.status(200).json(movie);
+    } else {
+      return res.status(404).json("No se encuentra la pelicula que buscas");
+    }
+  } catch (error) {
+    return next(error);
+  }
+});
+// fi
 
 
 module.exports = router;
